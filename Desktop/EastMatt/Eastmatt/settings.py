@@ -1,3 +1,7 @@
+# 📁 webappexample/settings.py -----
+
+import os
+from dotenv import load_dotenv, find_dotenv
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,6 +31,7 @@ INSTALLED_APPS = [
     'orders.apps.OrdersConfig',
     'payment.apps.PaymentConfig',
     'coupons.apps.CouponsConfig',
+    'authentication.apps.AuthenticationConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,11 +129,22 @@ MEDIA_ROOT = BASE_DIR / 'media'
 CART_SESSION_ID = 'cart'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Mzle8K2S4YF82yI5YdcqvkiFlCCQucOqrrU0SdY2mPL9jPlL7luaToZYjhjZzsrDFuYjhosmXHDhUYQASdZm4JF00cclchmaQ'
-STRIPE_SECRET_KEY = 'sk_test_51Mzle8K2S4YF82yIlgmj0Vdn3h4ZxFYENALakwMABQLO6zReioDUjphETDrkKgV5jZnZnL3EEsIiUV5SZEHOohcO00gnhfn9cy'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51NDWtjJlBCffBB0vfffdMEWLSmGGV87rJ8rLfBZZZbekBdUCbPI2EnAW7sgY9HZnDsPPh5kJuMDBdQtSMiejMl3N00u7OdZhbb'
+STRIPE_SECRET_KEY = 'sk_test_51NDWtjJlBCffBB0vjh2FKYsKK2YWtt4qCOnjXsOaTTcEnOfU3Y1AhpNYRYBSyFN9WB4txPsdDsKaaArPDuGgDuBj00vPuiU9oR'
 STRIPE_API_VERSION = '2022-08-01'
-STRIPE_WEBHOOK_SECRET = 'whsec_a2bdd98a3f2a6ecbd7c212877b0da4ffa3b9d8fdda4f443bc91b350079b6c323'
+STRIPE_WEBHOOK_SECRET = 'whsec_0a3d9829683f007112b0f2b04babade06cdb6cf4f06005051a640991715a4a6b'
 
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 REDIS_DB = 1
+
+# Load environment definition file
+ENV_FILE = find_dotenv()
+if ENV_FILE:
+    load_dotenv(ENV_FILE)
+
+
+# Load Auth0 application settings into memory
+AUTH0_DOMAIN = os.environ.get("AUTH0_DOMAIN")
+AUTH0_CLIENT_ID = os.environ.get("AUTH0_CLIENT_ID")
+AUTH0_CLIENT_SECRET = os.environ.get("AUTH0_CLIENT_SECRET")
